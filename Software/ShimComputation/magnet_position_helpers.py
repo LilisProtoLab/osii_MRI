@@ -50,8 +50,12 @@ def OSII_MINI(fname):
     """Magnets arranged in rings based on the shim trays for the OSII MINI
     """
     radius = .076
-    X_offsets = np.arange(-96,96+12,12)*1e-3
-    angles = np.r_[-36:39+10:10, 54:174+10:10, 144:219+10:10, 234:309+10:10]/180*np.pi
+    sector_angles = 8 # Number of magnets per sector - 16 for full and 8 for reduced
+    x_step = 12 # Step between rings of shim magnets - 6 for full and 12 for reduced
+    X_offsets = np.arange(-96,96+x_step,x_step)*1e-3
+    # angles = np.r_[-36:39+a_step:a_step, 54:129+a_step:a_step, 144:219+a_step:a_step, 234:309+a_step:a_step]/180*np.pi
+    angles = np.array([*np.linspace(-36,39,sector_angles), *np.linspace(54,129,sector_angles), *np.linspace(144,219,sector_angles), *np.linspace(234,309,sector_angles)])*np.pi/180
+    print(angles*180/np.pi)
     Ys = radius*np.sin(angles)
     Zs = radius*np.cos(angles)
 
@@ -62,7 +66,6 @@ def OSII_MINI(fname):
             Xs = np.full_like(Ys, x)
             rows = zip(Xs, Ys, Zs)
             writer.writerows(rows)
-
 
 if __name__ == "__main__":
     OSII_MINI('OSII_MINI_reduced.csv')

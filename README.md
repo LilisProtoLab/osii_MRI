@@ -71,7 +71,7 @@ In parallel, all outputs of this collaboration will be shared with the sister MR
 
 + Universidad Paraguayo Alemana: 
 	+ Project lead: Joshua Harper
-	+ Contributors: 
+	+ Contributors: Rodney Rojas
 
 + NIST Boulder: 
 	+ Project lead: Stephen Ogier

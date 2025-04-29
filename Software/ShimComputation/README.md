@@ -1,10 +1,12 @@
 # Shim Optimization
 
+Note: All positions are relative to the isocenter of the permanent magnet assembly (the center of the imaging volume), which is typically the geometric center of the magnet assembly. Shim magnet positions correspond to the location of the geometric center of the shim magnet.
+
 ## Algorithms
 
 ### `NIST_shim.py` 
 
-A _very slow_ genetic algorithm, and is not recommended at this time.
+A _very slow_ genetic algorithm. Not recommended at this time.
 
 ### `NIST_fast_shim.py`
 

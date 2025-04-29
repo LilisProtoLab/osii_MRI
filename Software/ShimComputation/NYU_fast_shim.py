@@ -20,17 +20,17 @@ import logging
 import time
 
 # Specify files with input data
-mag_pos_fname = 'example_data/OSII_MINI.csv'
-b0_map_fname = 'example_data/NIST_Smallbach_Swap_Smoothed_shell.csv'
-shim_out_fname = 'NIST_Shim_full_std_3.csv'
+mag_pos_fname = 'example_data/OSII_MINI_reduced.csv'
+b0_map_fname = 'example_data/shell_background_removed_2024_05_07_b0_sphere_100mm_5mm_increment.csv'
+shim_out_fname = 'NYU_Shim_reduced_ptp.csv'
 
 # If True, generate shim. If false, attempt to load existing shim from shim_out_fname
-generate_shim = False
+generate_shim = True
 
 # Choose cost function
 # ptp - minimize max(B0)-min(B0)
 # std - minimize std(B0)
-cost_fn = 'std'
+cost_fn = 'ptp'
 
 if cost_fn == 'std':
     metric = np.std
@@ -91,7 +91,7 @@ def magnet_pos_import(magnet_pos_fname):
     logging.info(f'Successful import of magnet position+angle specification: {magnet_pos_fname}')
     return magnet_pos_df
 
-def b0_map_import(b0_map_fname, l_unit = 'mm'):
+def b0_map_import(b0_map_fname, l_unit = 'mm', B_unit = 'T'):
     """Import B0 map CSV file.
     CSV has the following format:
     X   Y   Z   B0
@@ -107,6 +107,10 @@ def b0_map_import(b0_map_fname, l_unit = 'mm'):
         b0_map_df['X'] = b0_map_df['X'].values*1e-3
         b0_map_df['Y'] = b0_map_df['Y'].values*1e-3
         b0_map_df['Z'] = b0_map_df['Z'].values*1e-3
+    
+    if B_unit == 'G':
+        b0_map_df['B0'] = b0_map_df['B0']/1e4
+
     return b0_map_df
 
 def generate_magnets(mag_pos_angle):
@@ -188,7 +192,7 @@ def gen_sensors(b0_map_df):
     return sensors
 
 magnet_pos_df = magnet_pos_import(mag_pos_fname)
-b0_map_df = b0_map_import(b0_map_fname)
+b0_map_df = b0_map_import(b0_map_fname, B_unit='G')
 
 b0_map_vals = b0_map_df.to_numpy()[:,3]
 sensors = gen_sensors(b0_map_df)
