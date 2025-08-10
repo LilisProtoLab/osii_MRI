@@ -26,7 +26,7 @@ In this repository, we have split the steps into independent experiments so that
 ## Building the main magnet
 To create a uniform base field, we use the [Halbach Array](https://en.wikipedia.org/wiki/Halbach_array) construction. Check these [build instructions](./Docs/FrameAssembly) and [design files](./Build/HalbachFrame).
 
-The current design is adopted from the OSII mini magnet designed by Dr. Joshua Harper from [Sustainable MRI Lab](smrilab.com) and Thomas O'Reilly and [Andrew Webb at Leiden University](https://www.universiteitleiden.nl/en/staffmembers/andrew-webb#tab-2). The main change in our design is using lids for keeping small magnets in place instead glueing them.  
+The current design is adopted from the OSII mini magnet designed by Dr. Joshua Harper from [Sustainable MRI Lab](https://smrilab.com) and Thomas O'Reilly and [Andrew Webb at Leiden University](https://www.universiteitleiden.nl/en/staffmembers/andrew-webb#tab-2). The main change in our design is using lids for keeping small magnets in place instead glueing them.  
 
 __The Halbach Frame:__
 	+ 120 mm inner diameter 
